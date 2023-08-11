@@ -31,7 +31,7 @@ app.get(`/api/:juduls/:hal`,(reg,res)=>{
 })
 app.use((req, res, next) => {
     res.status(404).send(
-        "<h1>Salah Menempatkan query</h1>")
+        "<h1>Salah Menempatkan Query :(</h1>")
 })
 app.listen(port, ()=>{
     console.log(`Aplikasi berjalan di port ${port}`);
