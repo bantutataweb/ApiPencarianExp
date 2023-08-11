@@ -8,7 +8,7 @@ app.get(`/api/`,(reg,res)=>{
     if(reg.query.judul==null){
         res.send('/?judul=contoh&hal=1')
     }else{
-        var jdl = reg.query.judul==null?'https://github.com/bantutataweb/ApiPencarianExp':reg.query.hal;
+        var jdl = reg.query.hal;
         var halm = reg.query.hal==null?1:reg.query.hal;
         axios.get(`https://www.ask.com/web?q=${jdl}&page=${halm}`)  
         .then(function (response) {
