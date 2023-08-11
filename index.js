@@ -5,8 +5,8 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 app.get(`/api/`,(reg,res)=>{
-    var jdl = reg.params.judul;
-    var halm = reg.params.hal==null?1:reg.params.hal;
+    var jdl = reg.query.judul;
+    var halm = reg.query.hal==null?1:reg.query.hal;
     axios.get(`https://www.ask.com/web?q=${jdl}&page=${halm}`)  
     .then(function (response) {
         if(response.status==200){
