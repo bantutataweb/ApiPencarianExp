@@ -5,7 +5,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 app.get(`/api/`,(reg,res)=>{
-    if(reg.query.judul==null){
+    if(reg.query.judul==null||reg.query.hal==null){
         res.send('/?judul=contoh&hal=1')
     }else{
         var jdl = reg.query.hal;
