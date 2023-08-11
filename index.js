@@ -4,8 +4,8 @@ const port = 1999;
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-app.get(`/api/:juduls/:hal`,(reg,res)=>{
-    var jdl = reg.params.juduls;
+app.get(`/api/`,(reg,res)=>{
+    var jdl = reg.params.judul;
     var halm = reg.params.hal==null?1:reg.params.hal;
     axios.get(`https://www.ask.com/web?q=${jdl}&page=${halm}`)  
     .then(function (response) {
