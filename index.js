@@ -4,7 +4,7 @@ const port = 1999;
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-app.get(`/api/`,(reg,res)=>{
+app.get(`/askapi/`,(reg,res)=>{
     if(reg.query.judul==null){
         res.send('/?judul=contoh&hal=1')
     }else{
