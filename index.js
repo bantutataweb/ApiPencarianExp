@@ -4,6 +4,14 @@ const port = 1999;
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+app.get('/',(req,res)=>{
+    res.send(
+        `<ul>
+            <li><a href="https://apigerald.cyclic.app/askapi">API Pencarian ASK.COM</a></li>
+        </ul>`
+    )
+})
+
 app.get(`/askapi/`,(reg,res)=>{
     if(reg.query.judul==null){
         res.send('/?judul=contoh&hal=1')
@@ -25,7 +33,7 @@ app.get(`/askapi/`,(reg,res)=>{
                 })
                 res.send(JSON.stringify(loopingApi))
             }else{
-                console.log('Gagals Respons!');
+                console.log('Gagal Respons!');
             }
         })
         .catch(function (error) {
@@ -35,7 +43,7 @@ app.get(`/askapi/`,(reg,res)=>{
 })
 app.use((req, res, next) => {
     res.status(404).send(
-        "<h1>Salah Menempatkan Query :(</h1>")
+        "<h1>404 Salah Menempatkan Query :(</h1>")
 })
 app.listen(port, ()=>{
     console.log(`Aplikasi berjalan di port ${port}`);
