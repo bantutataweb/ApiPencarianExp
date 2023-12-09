@@ -1,8 +1,65 @@
+const qrcode = require('qrcode-terminal');
+const { Client } = require('whatsapp-web.js');
 const express = require('express');
 const app = express();
 const port = 1999;
 const axios = require('axios');
 const cheerio = require('cheerio');
+var clients = null;
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.set('view engine', 'ejs');
+
+client.on('qr', (qr) => {
+    qrcode.generate(qr, {small: true});
+});
+
+client.on('ready', () => {
+    console.log('Client is ready!');
+});
+
+client.initialize();
+
+// index page
+app.get('/otps', function(req, res) {
+    res.render('index');
+});
+
+function nomorTelp(nomor) {
+    let processedNumber = nomor.replace(/[^\d]/g, '');
+    if (processedNumber.startsWith('0')) {
+        processedNumber = '62' + processedNumber.slice(1);
+    }
+    if (processedNumber.startsWith('+')) {
+        processedNumber = processedNumber.slice(1);
+    }
+    return processedNumber;
+}
+
+app.post('/getOtp', async function(req, res){
+    try {
+        var sts = 0;
+        var nomor = req.body.nomor;
+        var message = '';
+        var nomors =  nomorTelp(nomor);
+
+        await client.sendMessage(`${nomors}@c.us`, 'Nomor OTP: '+Math.floor(Math.random() * 100 * 100))
+            .then((response) => {
+                sts = 1;
+                message = 'Berhasil Kirim OTP';
+            })
+            .catch((err) => {
+                message = 'Gagal Kirim OTP karena ' + err;
+            })
+            .finally(() => {
+                res.status(200).json({ status: sts, msg: message });
+            });
+    } catch (error) {
+        console.error('Unexpected error:', error);
+        res.status(500).json({ status: 0, msg: 'Internal Server Error' });
+    }
+})
 
 app.get('/',(req,res)=>{
     res.send(
